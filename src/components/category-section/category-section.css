@@ -1,0 +1,18 @@
+.category__content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.category__header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.category__info-btn {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 163%;
+    color: #3bb77e;
+}
