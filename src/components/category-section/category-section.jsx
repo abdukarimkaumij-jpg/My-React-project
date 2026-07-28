@@ -5,7 +5,7 @@ import Categories from '../category/category'
 import { useCategoryContext } from '../../context/category-context'
 
 function CategorySection() {
-    const { category } = useCategoryContext();
+    const { category, selectedCategory, selectCategory, resetCategory } = useCategoryContext();
 
     return (
         <section className="category">
@@ -15,7 +15,7 @@ function CategorySection() {
                         <h2 className="category__info-title title">
                             Shop by Categories
                         </h2>
-                        <button className="category__info-btn">
+                        <button className="category__info-btn" onClick={resetCategory}>
                             All Categories
                         </button>
                     </div>
@@ -53,6 +53,8 @@ function CategorySection() {
                                     icon={item.icon}
                                     name={item.name}
                                     products_count={item.products_count}
+                                    active={selectedCategory?.id === item.id}
+                                    onClick={() => selectCategory({ id: item.id, products_count: item.products_count })}
                                 />
                             </SwiperSlide>
                         ))}

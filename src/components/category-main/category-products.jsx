@@ -1,13 +1,20 @@
 import { useCategoryContext } from '../../context/category-context';
 import './category-products.css'
 function CategoryProducts() {
-    const { category, selectCategory, selectedCategory } = useCategoryContext();
+    const { category, selectCategory, selectedCategory, resetCategory } = useCategoryContext();
 
     return(
         <div className="products__category-body">
             <h2 className="category__body-name">Category</h2>
 
             <div className="category__body-list">
+                <button
+                    onClick={resetCategory}
+                    className={`category__list-btn ${!selectedCategory ? 'active' : ''}`}
+                >
+                    <h5 className="category__btn-name">Hammasi</h5>
+                </button>
+
                 {category.categories?.map((item) => (
                     <button
                         key={item.id}

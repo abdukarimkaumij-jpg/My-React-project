@@ -46,6 +46,8 @@ export const AuthContext = ({ children }) => {
     const logout = () => {
         localStorage.removeItem("access_token");
         setUser(null);
+        // 🔥 Boshqa contextlar (masalan savatcha) darhol yangilansin
+        window.dispatchEvent(new Event("authchange"));
     };
 
     return (

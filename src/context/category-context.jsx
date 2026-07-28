@@ -19,7 +19,14 @@ export const CategoryContext = ({ children }) => {
     };
 
     const selectCategory = (category_id) => {
-        setSelectedCategory(category_id);
+        // 🔥 Xuddi shu category qayta bosilsa - filter bekor qilinadi (toggle)
+        setSelectedCategory((prev) =>
+            prev?.id === category_id?.id ? null : category_id
+        );
+    };
+
+    const resetCategory = () => {
+        setSelectedCategory(null);
     };
 
     useEffect(() => {
@@ -30,7 +37,8 @@ export const CategoryContext = ({ children }) => {
         <ContextProvider.Provider value={{
             category,
             selectedCategory,
-            selectCategory
+            selectCategory,
+            resetCategory
         }}>
             {children}
         </ContextProvider.Provider>

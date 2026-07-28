@@ -40,6 +40,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+}
+.products__category-body .category__list-btn.active {
+    background: #bce3c9;
+    border-color: #bce3c9;
 } 
 .products__category-body .category__btn-name {
     font-family: var(--second-family);

@@ -7,13 +7,22 @@ export const useCartContext = () => useContext(CartContext);
 
 const API = "https://nestmart-api-core.lovable.app/api/public/cart";
 
+// 🔥 Har safar chaqirilganda localStorage'dan YANGI tokenni o'qiydi.
+// Eski kod tokenni faqat provider mount bo'lganda bir marta o'qigan edi,
+// shu sabab login qilgandan keyin sahifani yangilamasdan "Add to cart"
+// ishlamas edi (token doim eski/null bo'lib qolardi).
+const getToken = () => localStorage.getItem("access_token");
+
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const token = localStorage.getItem("access_token");
 
   // 🧾 GET CART
   const getCart = async () => {
-    if (!token) return;
+    const token = getToken();
+    if (!token) {
+      setCart([]);
+      return;
+    }
 
     try {
       const res = await axios.get(API, {
@@ -30,7 +39,11 @@ export const CartProvider = ({ children }) => {
 
   // ➕ ADD
   const addToCart = async (productId, quantity = 1) => {
-    if (!token) return;
+    const token = getToken();
+    if (!token) {
+      alert("Savatga qo‘shish uchun avval tizimga kiring!");
+      return;
+    }
 
     try {
       await axios.post(
@@ -46,14 +59,15 @@ export const CartProvider = ({ children }) => {
         }
       );
 
-      getCart();
+      await getCart();
     } catch (err) {
       console.log("Add cart error:", err);
     }
   };
 
-  // ❌ REMOVE (🔥 ASOSIY FIX SHU YERDA)
+  // ❌ REMOVE
   const removeFromCart = async (item) => {
+    const token = getToken();
     if (!token) return;
 
     const itemId = item?.id; // ⚠️ item.id bo‘lishi shart
@@ -79,6 +93,7 @@ export const CartProvider = ({ children }) => {
 
   // ➕ INCREASE
   const increaseQuantity = async (item) => {
+    const token = getToken();
     if (!token) return;
 
     try {
@@ -95,7 +110,7 @@ export const CartProvider = ({ children }) => {
         }
       );
 
-      getCart();
+      await getCart();
     } catch (err) {
       console.log("Increase error:", err);
     }
@@ -103,6 +118,7 @@ export const CartProvider = ({ children }) => {
 
   // ➖ DECREASE
   const decreaseQuantity = async (item) => {
+    const token = getToken();
     if (!token) return;
 
     if (item.quantity <= 1) {
@@ -124,7 +140,7 @@ export const CartProvider = ({ children }) => {
         }
       );
 
-      getCart();
+      await getCart();
     } catch (err) {
       console.log("Decrease error:", err);
     }
@@ -132,6 +148,15 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     getCart();
+
+    // 🔥 Login/logout bo'lganda (shu tabda ham, boshqa tabda ham) cartni yangilash
+    const handleAuthChange = () => getCart();
+    window.addEventListener("authchange", handleAuthChange);
+    window.addEventListener("storage", handleAuthChange);
+    return () => {
+      window.removeEventListener("authchange", handleAuthChange);
+      window.removeEventListener("storage", handleAuthChange);
+    };
   }, []);
 
   return (

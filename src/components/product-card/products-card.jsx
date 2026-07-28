@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../../context/CartContext';
 import './products-card.css'
 
 function ProductsCard({
@@ -12,6 +13,16 @@ function ProductsCard({
     old_price,
     category_id
 }) {
+    const { addToCart } = useCartContext();
+
+    // 🔥 FIX: "Add" tugmasi Link ichida bo'lgani uchun sahifaga o'tib
+    // ketmasligi va savatga qo'shishi uchun preventDefault/stopPropagation kerak
+    const handleAddToCart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addToCart(id, 1);
+    };
+
     return (
         <Link to={`/product/${id}`} className="product__wraper-flex">
 
@@ -40,7 +51,7 @@ function ProductsCard({
                 <div className="product__body-footer">
                     <span className="product__footer-ins">${price}</span>
                     <span className="product__footer-del">${old_price}</span>
-                    <button className="product__footer-button">
+                    <button className="product__footer-button" onClick={handleAddToCart}>
                         <span>Add</span>
                     </button>
                 </div>

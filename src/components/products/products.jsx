@@ -22,8 +22,10 @@ function Products() {
     const categoryId = selectedCategory?.id;
 
     // 🔥 FILTER (FAqat filter — kesilmaydi)
+    // API ba'zan category_id ni to'g'ridan-to'g'ri, ba'zan esa category.id
+    // ko'rinishida qaytarishi mumkin — shu sabab ikkalasini ham tekshiramiz
     const filteredData = categoryId
-        ? baseData.filter(item => item?.category_id === categoryId)
+        ? baseData.filter(item => (item?.category_id ?? item?.category?.id) === categoryId)
         : baseData;
 
     // 🔥 LOAD MORE (asosiy control shu)

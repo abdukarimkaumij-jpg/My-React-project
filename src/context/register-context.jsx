@@ -42,6 +42,9 @@ export const RegisterProvider = ({ children }) => {
 
             console.log(res.data.data.access_token);
 
+            // 🔥 Boshqa contextlar (masalan savatcha) darhol yangilansin
+            window.dispatchEvent(new Event("authchange"));
+
             setSuccess("Successfully registered!");
             setError("");
 

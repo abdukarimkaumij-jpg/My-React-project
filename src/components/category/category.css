@@ -10,6 +10,13 @@
     flex-direction: column;
     gap: 19px;
 }
+.category__wrap-flex.active {
+    background: #bce3c9;
+    border-color: #bce3c9;
+}
+.category__wrap-flex {
+    cursor: pointer;
+}
 .category__flex-name {
     font-family: var(--second-family);
     font-weight: 700;

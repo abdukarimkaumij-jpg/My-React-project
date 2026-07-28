@@ -37,6 +37,9 @@ export const LoginContext = ({ children }) => {
                 res.data.data.access_token
             );
 
+            // 🔥 Boshqa contextlar (masalan savatcha) darhol yangilansin
+            window.dispatchEvent(new Event("authchange"));
+
             setSuccess("Successfully logged in!");
             setError("");
 
