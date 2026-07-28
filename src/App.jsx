@@ -8,6 +8,7 @@ import Profile from './pages/profile'
 import Wishlist from './pages/wshlist'
 import Cart from './pages/cart'
 import About from './pages/about'
+import Contact from './pages/contact'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path='/product/:id' element={<PtoductDetailsContent />} />
       <Route path='/cart' element={<Cart/>} />
       <Route path='/about' element={<About/>} />
+      <Route path='/contact' element={<Contact/>} />
     </Routes>
   )
 }

@@ -32,7 +32,7 @@ function HeaderMenu() {
                             <Link className="menu__list-link">Pages </Link>
                         </li>
                         <li className="menu__item-list">
-                            <Link className="menu__list-link">Contact</Link>
+                            <Link to="./contact" className="menu__list-link">Contact</Link>
                         </li>
                     </ul>
                 </menu>
