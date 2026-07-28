@@ -7,14 +7,15 @@ export const useAuthContext = () => useContext(ContextProvider);
 
 export const AuthContext = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const token = localStorage.getItem("access_token");
-    console.log(user)
+
     // 🔥 GET ME
     const getMe = async (customToken) => {
         const finalToken = customToken || token;
 
         if (!finalToken) {
-            
+            setLoading(false);
             return;
         }
 
@@ -33,7 +34,9 @@ export const AuthContext = ({ children }) => {
             console.log("Auth error:", error);
             localStorage.removeItem("access_token");
             setUser(null);
-        } 
+        } finally {
+            setLoading(false);
+        }
     };
     useEffect(() => {
         getMe();
@@ -46,7 +49,7 @@ export const AuthContext = ({ children }) => {
     };
 
     return (
-        <ContextProvider.Provider value={{ user}}>
+        <ContextProvider.Provider value={{ user, logout, loading, getMe }}>
             {children}
         </ContextProvider.Provider>
     );

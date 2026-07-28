@@ -23,22 +23,22 @@ createRoot(document.getElementById('root')).render(
         <CategoryContext>
           <ProductDetailsProvider>
             <SearchProvider>
-                <Header/>
                 <RegisterProvider>
                   <LoginContext>
                     <AuthContext>
                       <WishlistProvider>
                         <NewsletterProvider>
                           <CartProvider>
+                            <Header/>
                             <App />
+                            <Search/>
+                            <Footer/>
                           </CartProvider>
                         </NewsletterProvider>
                       </WishlistProvider>
                     </AuthContext>
                   </LoginContext>
                 </RegisterProvider>
-                <Search/>
-                <Footer/>
             </SearchProvider>
           </ProductDetailsProvider>
         </CategoryContext>
