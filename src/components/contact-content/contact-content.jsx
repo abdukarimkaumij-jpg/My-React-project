@@ -23,8 +23,6 @@ function ContactContent() {
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
                             </p>
                         </div>
-
-
                         <div className="map__info-wrap">
                             <div className="map__wrap-flex">
                                 <h5 className="map__flex-name">
@@ -70,13 +68,9 @@ function ContactContent() {
                             </div>
                         </div>
                     </div>
-
-
                     <div className="map__content-map">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5340.344756403806!2d69.22844491902875!3d41.305228869731444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ba82aae4355%3A0x10d769f0b9053f4f!2z0JzQtdC00YDQtdGB0LUg0JDQsdGD0LvQutC-0YHQuNC8!5e0!3m2!1sru!2s!4v1785258253930!5m2!1sru!2s"
-                            width="600"
-                            height="450"
                             style={{ border: 0 }}
                             allowFullScreen
                             loading="lazy"
@@ -100,7 +94,17 @@ function ContactContent() {
                     </div>
                     <div className="contact__content-wrap">
                         <form  className="contact__wrap-form">
-                            
+                            <div className="contact__form-input">
+                                <input type="name" placeholder='First Name'/>
+                                <input type="email" placeholder='Your Email' />
+                            </div>
+                            <div className="contact__form-input">
+                                <input type="phone" placeholder='Your Phone'/>
+                                <input type="subject" placeholder='Subject' />
+                            </div>
+                            <div className="contact__form-input">
+                                <input type="massege"/>
+                            </div>
                         </form>
                     </div>
                 </div>
